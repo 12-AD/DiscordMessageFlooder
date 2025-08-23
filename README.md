@@ -2,7 +2,7 @@
 
 This repository contains a Manager Bot to manage multiple Discord bots (slave bots) that send messages through Discord. Each slave bot automatically loads its token based on the filename and can send DMs with customizable options. (Flooding)
 
-#Setup
+# Setup
 
 ## Installation
 Download the files as a zip or clone the repo 
