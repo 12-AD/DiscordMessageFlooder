@@ -5,6 +5,7 @@ This repository contains a Manager Bot to manage multiple Discord bots (slave bo
 # Setup
 ## Creating a bot with Discord
 Travel to the Discord Developer Portal.
+
 Once there and logged in, click "New Application"
 Select a name for your application, accept the TOS, and click create.
 You can change the profile picture of your application. (Make sure to press "Save Changes" at the bottom)
