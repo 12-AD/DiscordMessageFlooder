@@ -33,6 +33,7 @@ for permissions:
 - The "Exodus command" (command I made for debugging)  does require "Manage Channels" Permissions. (Only required for the manager bot)
 - The **Required** Permissions for any bot: "Send messages", "View Channels"
 - If you are having issues, tick the "Admin" Box (What I usually do); it gives your bot complete control of the server. If you do this, **MAKE SURE YOU DON'T LEAK YOUR TOKEN!** This is how servers get nuked.
+  
 Then, click "Copy" at the bottom and paste that link in any chat of the server you want to add to the bot(s) to (you must be an admin).
 Then click the link, and it should prompt you to add the bot to the server. Do these stops for however many bots you want. If you want *a lot* of bots, you will need to make alts since the application limit is fairly low.
 
