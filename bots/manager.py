@@ -4,9 +4,11 @@ import logging
 import asyncio
 import os
 from dotenv import load_dotenv
+import subprocess
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
+admin_ids = [int(x.strip()) for x in os.getenv("OWNER_IDS", "").split(",") if x.strip()] #makes a list of admin IDs
 
 handler = logging.FileHandler(filename="discord.log", encoding="utf-8", mode="w")
 intents = discord.Intents.default()
@@ -48,11 +50,10 @@ async def spamdm(ctx, num: int, user: discord.User, *, content: str):
 
 @bot.command()
 async def help(ctx):
-   # Count running bot files (including the manager script itself)
+    # Count running bot files (including the manager script itself)
     bots_folder = os.path.dirname(__file__)  # current folder
     bot_files = [f for f in os.listdir(bots_folder) if f.endswith(".py") and f != os.path.basename(__file__)]
     bot_count = len(bot_files)
-
 
     embed = discord.Embed(
         title="Manager Bot Help",
@@ -98,5 +99,25 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
-bot.run(token, log_handler=handler, log_level=logging.DEBUG)
+@bot.command()
+async def shutdown(ctx):
+    """Shuts down the manager bot (owner only)."""
+    if ctx.author.id not in admin_ids:
+        await ctx.send("❌ You are not authorized to shut down the bot.")
+        return
 
+    await ctx.send("⚠️ Shutting down all bots...")
+
+    # Call the batch file to stop all bots
+    bat_path = os.path.join(os.path.dirname(__file__), "stop_all.bat")
+    if os.path.exists(bat_path):
+        subprocess.Popen([bat_path], shell=True)
+        await ctx.send("✅ Stop command sent. Exiting manager bot...")
+    else:
+        await ctx.send("❌ stop_all.bat not found, shutting down manager only.")
+
+    # Shut down the manager bot
+    await bot.close()
+
+
+bot.run(token, log_handler=handler, log_level=logging.DEBUG)
