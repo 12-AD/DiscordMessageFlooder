@@ -109,12 +109,12 @@ async def shutdown(ctx):
     await ctx.send("⚠️ Shutting down all bots...")
 
     # Call the batch file to stop all bots
-    bat_path = os.path.join(os.path.dirname(__file__), "stop_all.bat")
+    bat_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "stop_bots.bat")
     if os.path.exists(bat_path):
         subprocess.Popen([bat_path], shell=True)
         await ctx.send("✅ Stop command sent. Exiting manager bot...")
     else:
-        await ctx.send("❌ stop_all.bat not found, shutting down manager only.")
+        await ctx.send("❌ stop_bots.bat not found, shutting down manager only.")
 
     # Shut down the manager bot
     await bot.close()
