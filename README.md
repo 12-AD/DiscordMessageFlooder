@@ -2,13 +2,15 @@
 
 This repository contains a Manager Bot to manage multiple Discord bots (slave bots) that send messages through Discord. Each slave bot automatically loads its token based on the filename and can send DMs with customizable options. (Flooding)
 
-# Installation
+#Setup
+
+## Installation
 Download the files as a zip or clone the repo 
 
 ```
 pip install discord.py python-dotenv
 ```
-# Folder Structure
+## Folder Structure
 Note that the bot uses its filename as an "id". If you want to change the filename, you will need to change the ID variable in each slave bot to an appropriate number. the code on each slave bot file is the exact same. Only the file names differ.
 ```
 /bots
@@ -23,7 +25,7 @@ stop_bots.ps1
 start_bots.vbs
 restart_bots.bat
 ```
-# Environment Variables (.env)
+## Environment Variables (.env)
 Create a .env file in the root directory:
 ```
 DISCORD_TOKEN=<manager_bot_token>
@@ -35,11 +37,11 @@ PREFIX=!
 OWNER_IDS=123456789012345678,987654321098765432
 #change to your owner id(s)
 ```
-# Starting the bots
+## Starting the bots
 run the ``` start_bots.vbs ``` file. This will prompt you to run it with or without command prompt windows (I recommend clicking "no")
 Then your bots should be online
-## Commands
-# Manager Bot Commands
+# Commands
+## Manager Bot Commands
 
 ``` !exodus ```
 Deletes all channels in the server and creates a single channel called Abd. Administrator only. (Mainly used when testing)
@@ -53,7 +55,7 @@ Shuts down all bots using stop_bots.bat (owner only). Requires the author’s ID
 ``` !help ```
 Shows a detailed help embed with all commands and running slave bots.
 
-# Slave Bot Commands
+## Slave Bot Commands
 Slave Bot (!dm) Commands
 
 ```!dm <user> <message>``` 
