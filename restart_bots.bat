@@ -11,4 +11,4 @@ echo Starting bots...
 cscript //nologo "%~dp0start_bots.vbs"
 
 echo Bots restarted!
-pause
+
