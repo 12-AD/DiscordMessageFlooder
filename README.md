@@ -7,16 +7,27 @@ This repository contains a Manager Bot to manage multiple Discord bots (slave bo
 Travel to the Discord Developer Portal.
 
 Once there and logged in, click "New Application"
+
 Select a name for your application, accept the TOS, and click create.
+
 You can change the profile picture of your application. (Make sure to press "Save Changes" at the bottom)
+
 Next, travel to the "Bot" Section on the left (you can also change the picture and display name there)
+
 There, you can obtain your token, which will be required for your .env file.
+
 If you scroll down a little further, you will see "Privileged Gateway Intents"
+
 I recommend selecting all 3 of them. 
+
 Make sure to press "Save Changes".
+
 Next, travel to the "OAuth2" section 
+
 scroll to the "OAuth2 URL Generator"
+
 select "Bot" (3rd row, 3rd column at the time of making this)
+
 for permissions:
 - DM commands don't require any permission
 - The "Exodus command" (command I made for debugging)  does require "Manage Channels" Permissions. (Only required for the manager bot)
