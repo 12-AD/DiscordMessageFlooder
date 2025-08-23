@@ -92,10 +92,11 @@ async def help(ctx):
         inline=False,
     )
 
-    embed.set_footer(text="Manager Bot • Made by You")
+    embed.set_footer(text="Manager Bot • Made by @12_ad")
     embed.set_thumbnail(url=bot.user.avatar.url if bot.user.avatar else None)
 
     await ctx.send(embed=embed)
 
 
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
+
