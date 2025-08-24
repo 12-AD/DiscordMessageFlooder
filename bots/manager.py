@@ -120,4 +120,25 @@ async def shutdown(ctx):
     await bot.close()
 
 
+@bot.command()
+async def start(ctx):
+    """Starts all slave bots (owner only)."""
+    if ctx.author.id not in admin_ids:
+        await ctx.send("❌ You are not authorized to start bots.")
+        return
+
+    await ctx.send("🚀 Starting all bots (hidden mode)...")
+
+    # Path to the VBS file
+    vbs_path = os.path.join(os.path.dirname(__file__), "..", "start_bots.vbs")
+
+    if os.path.exists(vbs_path):
+        # Run the script with "no" automatically
+        # The WScript.Shell can accept arguments, we simulate "no" directly
+        subprocess.Popen(["wscript.exe", vbs_path, "no"], shell=True)
+        await ctx.send("✅ Bots are starting up in the background!")
+    else:
+        await ctx.send("❌ start_bots.vbs not found!")
+
+
 bot.run(token, log_handler=handler, log_level=logging.DEBUG)
