@@ -1,24 +1,36 @@
-Set WshShell = CreateObject("WScript.Shell")
-Set fso = CreateObject("Scripting.FileSystemObject")
+' start_bots.vbs
+Set objArgs = WScript.Arguments
+Dim autoNo
+autoNo = False
 
-' Ask user if they want consoles visible
-choice = MsgBox("Do you want to run the bots with console windows?", vbYesNo + vbQuestion, "Bot Launcher")
+If objArgs.Count > 0 Then
+    If LCase(objArgs(0)) = "no" Then
+        autoNo = True
+    End If
+End If
 
-' Set paths
-botsFolder = ".\bots\"   ' Folder containing your .py bot files
-pythonExe = "python.exe"
-pythonwExe = "pythonw.exe"
+If autoNo = True Then
+    runHidden = True
+Else
+    answer = MsgBox("Do you want to show the console windows?", vbYesNo + vbQuestion, "Start Bots")
+    If answer = vbYes Then
+        runHidden = False
+    Else
+        runHidden = True
+    End If
+End If
 
-' Get all .py files in the bots folder
-Set folder = fso.GetFolder(botsFolder)
+Set objShell = CreateObject("WScript.Shell")
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+Set folder = objFSO.GetFolder(objFSO.BuildPath(objFSO.GetParentFolderName(WScript.ScriptFullName), "bots"))
+
 For Each file In folder.Files
-    If LCase(fso.GetExtensionName(file.Name)) = "py" Then
-        If choice = vbYes Then
-            ' Run with console
-            WshShell.Run """" & pythonExe & """ """ & file.Path & """", 1, False
+    If LCase(objFSO.GetExtensionName(file.Name)) = "py" And file.Name <> "manager.py" Then
+        If runHidden Then
+            objShell.Run "python " & Chr(34) & file.Path & Chr(34), 0
         Else
-            ' Run hidden
-            WshShell.Run """" & pythonwExe & """ """ & file.Path & """", 0, False
+            objShell.Run "python " & Chr(34) & file.Path & Chr(34), 1
         End If
     End If
 Next
